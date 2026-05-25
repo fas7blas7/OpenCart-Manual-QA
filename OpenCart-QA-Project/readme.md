@@ -62,9 +62,7 @@ OpenCart-QA-Project/
 ├── 10-ci-cd/
 ├── docs/
 └── Screenshots/
-
-
----
+```
 
 ## 🚀 Key Skills Demonstrated
 
