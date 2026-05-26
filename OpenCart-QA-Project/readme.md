@@ -73,6 +73,16 @@ OpenCart-QA-Project/
 - Exploring edge cases
 - Documenting QA findings clearly
 
+## 📂 Project Structure
+
+## ▶️ How to Run Tests
+
+## 📊 Reporting
+
+## 🚀 CI/CD
+
+## 🧪 Test Coverage
+
 ---
 
 ## 📌 Conclusion
