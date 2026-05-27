@@ -2,7 +2,9 @@ Test Case 10 - Checkout
 Test Steps: 
 * Click Checkout button in the Shopping Cart page 
 Browser: Brave 1.90.124 (Official Build) (64-bit), Chromium: 148.0.7778.179 
+
 Test Data: User email: skylinecho@abv.bg password - 1234 
+
 Expected/Intended Results: User sees Checkout page with the following information:
 
 Checkout Payment 
