@@ -61,7 +61,7 @@ OpenCart-QA-Project/
 ├── 09-automation-ui/
 ├── 10-ci-cd/
 ├── docs/
-└── Screenshots/
+└── screenshots/
 ```
 
 ## 🚀 Key Skills Demonstrated
@@ -72,6 +72,30 @@ OpenCart-QA-Project/
 - Creating test plans
 - Exploring edge cases
 - Documenting QA findings clearly
+
+# API Testing — OpenCart Project
+
+This folder contains API testing artifacts for the OpenCart QA project.
+
+## Tools Used
+- Postman
+- Newman
+- Docker (optional execution)
+
+## Scope
+- Login API validation
+- Negative testing
+- Response status validation
+- Basic security checks
+
+## Execution
+Tests are executed using Postman manually or Newman CLI for automation.
+
+Example command:
+newman run postman/collections/opencart-login.collection.json -e postman/environments/opencart-dev.environment.json
+
+## Output
+Test results are exported as CLI or HTML reports (future enhancement)
 
 ## 📂 Project Structure
 

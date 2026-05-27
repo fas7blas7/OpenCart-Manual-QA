@@ -76,3 +76,69 @@ Current system uses generic authentication message instead of field-level valida
 ### Expected Result:
 - Password is masked
 - No visible plaintext characters
+
+## TC-LOGIN-006 — Special Characters in email
+Test data - Login - test@@abv.bg
+            Password - 1234
+
+
+**Priority:** High  
+**Type:** Validation
+
+### Expected Result:
+- Login rejected
+
+## TC-LOGIN-007 — Wrong email format
+Test data - Login - test#$@abv
+            Password - 1234
+
+**Priority:** High  
+**Type:** Validation
+
+### Expected Result:
+- Login rejected
+
+## TC-LOGIN-008 — Password with spaces only
+Test data - Login - test#$@abv
+            Password - "     "
+
+**Priority:** High  
+**Type:** Validation
+
+### Expected Result:
+- Login rejected
+
+## TC-LOGIN-009 — SQL Injection
+Test data - Login - test'; DROP users--
+            Password - 1' or '1'='1
+
+**Priority:** High  
+**Type:** Validation
+
+### Expected Result:
+- Login attempt rejected
+- Application remains stable
+- No system/database error messages displayed
+
+## TC-LOGIN-0010 — Password with spaces only
+Test data - Login - test'; DROP users--
+            Password - 1' or '1'='1
+
+**Priority:** High  
+**Type:** Validation
+
+### Expected Result:
+- Request rejected
+
+### Actual Result:
+- Request rejected
+
+## TC-LOGIN-011 — Extremely long input for login and password
+Test data - Login - verylongtestusernamethatiswaybeyondnormalapplicationlimitsandshouldbetestedforvalidationpurposes1234567890abcdefghijklmnopqrstuvwxyz@example-super-long-domain-name-testing-validation.com
+            Password - P@ssword123!P@ssword123!P@ssword123!P@ssword123!P@ssword123!P@ssword123!P@ssword123!P@ssword123!P@ssword123!P@ssword123!
+
+**Priority:** High  
+**Type:** Validation
+
+### Expected Result:
+- Request rejected
