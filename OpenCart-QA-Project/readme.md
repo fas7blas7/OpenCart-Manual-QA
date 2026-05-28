@@ -1,49 +1,81 @@
-
 # 🧪 OpenCart QA Portfolio Project
 
 ## 📌 Overview
-This project demonstrates my Manual QA skills through structured testing of the OpenCart demo application.
 
-The focus is on core QA activities including:
-- Requirements analysis
-- Test planning
-- Test case design
-- Bug reporting
-- Exploratory testing
-- Test environment definition
+This project demonstrates my Manual QA practice using the OpenCart e-commerce application. It simulates a real-world QA workflow including requirement analysis, test design, execution, exploratory testing, and defect reporting.
+
+The project covers both **backend (admin panel)** and **frontend (storefront)** testing, including real defect identification and structured QA documentation.
 
 ---
 
 ## 🎯 Project Scope
 
 ### ✔ In Scope
-- User Login functionality
-- Session management
-- Product browsing
-- Add to Cart functionality
-- Cart management
-- Shipping estimation
-- Checkout flow (up to payment step)
+
+* Admin Panel (Product Management)
+* Product creation, editing, deletion
+* Input validation (positive & negative testing)
+* Storefront behavior (product visibility, cart functionality)
+* Login validation scenarios (admin + storefront behavior)
+* Exploratory testing sessions
+* Bug reporting and defect tracking
+
+---
 
 ### ❌ Out of Scope
-- Payment gateway processing (restricted in demo environment)
-- Backend admin panel testing
-- Performance / Load testing
+
+* Real payment gateway processing
+* Production deployment testing
+* Performance / load testing
+* External third-party integrations (payment/shipping providers)
 
 ---
 
 ## 🧪 Testing Types Performed
 
-- Functional Testing
-- UI Testing
-- Validation Testing
-- Negative Testing
-- Exploratory Testing
-- Regression Testing (manual re-check)
+* Functional Testing
+* Negative Testing
+* Validation Testing
+* UI / UX Testing
+* Exploratory Testing
+* Boundary Testing
+* Data Integrity Testing
+* Business Rule Validation
 
 ---
 
-## 🧩 Test Artifacts (Project Structure)
+## 🐞 Defect Management
+
+During testing, multiple functional and business-rule defects were identified and documented, including:
+
+* Product validation issues (empty / invalid fields)
+* Duplicate product handling inconsistencies
+* Category assignment and visibility issues
+* Stock and cart behavior issues
+* UX issues (missing warnings, navigation behavior)
+
+All defects are documented in the `/04-bug-reports` directory.
+
+---
+
+## 🐞 Bug Summary Overview
+
+| ID      | Title                                              | Severity | Priority | Status |
+| ------- | -------------------------------------------------- | -------- | -------- | ------ |
+| BUG-001 | Login form allows empty password submission        | Medium   | Medium   | Open   |
+| BUG-002 | Incorrect flat shipping rate applied               | Medium   | High     | Open   |
+| BUG-003 | Missing category images                            | Medium   | Medium   | Open   |
+| BUG-004 | Product allows zero price and quantity             | High     | High     | Open   |
+| BUG-005 | Product without category not visible in storefront | High     | Medium   | Open   |
+| BUG-006 | Duplicate product names allowed                    | Medium   | Medium   | Open   |
+| BUG-007 | Duplicate product model names allowed              | Medium   | Medium   | Open   |
+| BUG-008 | No unsaved changes warning in edit form            | Medium   | Medium   | Open   |
+| BUG-009 | Out-of-stock product can be added to cart          | Medium   | High     | Open   |
+| BUG-010 | Product created without category assignment        | Medium   | Medium   | Open   |
+
+---
+
+## 🧩 Project Structure
 
 ```
 OpenCart-QA-Project/
@@ -54,61 +86,142 @@ OpenCart-QA-Project/
 ├── 02-test-plan/
 ├── 03-test-cases/
 ├── 04-bug-reports/
+│   ├── BUG-001-login-form-allows-empty-password.md
+│   ├── BUG-002-incorrect-flat-shipping-rate.md
+│   ├──	BUG-003-missing-category-images.md
+│   ├──	BUG-004-product-add-allows-zero-price-and-quantity.md
+│   ├── BUG-005-inconsistent-product-models.md
+│   ├── BUG-006-duplicate-product-names-allowed.md
+│   ├── BUG-007-duplicate-product-model-names.md
+│   ├── BUG-008-no-unsaved-changes-warning.md
+│   ├── BUG-009-out-of-stock-add-to-cart.md
+│   ├── BUG-010-product-without-category.md
+│   ├── ft-execution-001.md
+│   ├── smoke-report-001.md
+│
 ├── 05-test-data/
 ├── 06-exploratory-testing/
 ├── 07-environment/
-├── 08-api-tests/
-├── 09-automation-ui/
-├── 10-ci-cd/
+│
+├── 08-api-testing/ (Planned)
+│   └── newman/
+│   └── postman/
+│       ├── collections/
+│       └── environments/
+│
+├── 09-automation-ui/   (Planned)
+├── 10-ci-cd/           (Planned)
 ├── docs/
 └── screenshots/
 ```
 
-## 🚀 Key Skills Demonstrated
+---
 
-- Writing structured test cases
-- Understanding requirements
-- Identifying functional defects
-- Creating test plans
-- Exploring edge cases
-- Documenting QA findings clearly
+## 🔧 Tools Used
 
-# API Testing — OpenCart Project
+* OpenCart (local installation via XAMPP)
+* Postman (API testing)
+* Newman (CLI test execution)
+* XAMPP (local server environment)
+* Git & GitHub (version control)
 
-This folder contains API testing artifacts for the OpenCart QA project.
+---
 
-## Tools Used
-- Postman
-- Newman
-- Docker (optional execution)
+## 🚀 API Testing (OpenCart / Demo APIs)
 
-## Scope
-- Login API validation
-- Negative testing
-- Response status validation
-- Basic security checks
+API testing was implemented as a supporting QA layer.
 
-## Execution
-Tests are executed using Postman manually or Newman CLI for automation.
+### Tools Used
 
-Example command:
-newman run postman/collections/opencart-login.collection.json -e postman/environments/opencart-dev.environment.json
+* Postman
+* Newman CLI
 
-## Output
-Test results are exported as CLI or HTML reports (future enhancement)
+### Scope
 
-## 📂 Project Structure
+* API request validation
+* Response status code verification
+* Negative test scenarios
+* Collection-based execution
 
-## ▶️ How to Run Tests
+### Structure
 
-## 📊 Reporting
+All Postman collections and environments are stored inside:
 
-## 🚀 CI/CD
+```
+08-api-tests/postman/
+```
 
-## 🧪 Test Coverage
+### Execution Example
+
+```bash
+newman run postman/collections/opencart.collection.json -e postman/environments/local.environment.json
+```
+
+---
+
+## 🚧 Planned Improvements (Future Work)
+
+This project is designed as a growing QA portfolio. The following improvements are planned:
+
+### 08 — API Testing Expansion
+
+* More comprehensive API coverage
+* Authentication flows
+* Data-driven API tests
+* Extended negative test scenarios
+* Improved reporting (HTML reports via Newman)
+
+---
+
+### 09 — UI Automation Testing
+
+* Introduction of UI automation framework
+* Possible tools: Selenium / Cypress
+* Basic test automation for:
+
+  * Login
+  * Product creation
+  * Cart flow
+* Regression test automation suite
+
+---
+
+### 10 — CI/CD Integration
+
+* GitHub Actions pipeline setup
+* Automated test execution on push/PR
+* Newman CLI integration into CI
+* Future integration of UI automation into pipeline
+
+---
+
+## 🧠 Key Skills Demonstrated
+
+* Test case design from requirements
+* Exploratory testing in real application
+* Functional and negative test execution
+* Defect identification and reporting
+* Understanding business rules and validation logic
+* API testing basics (Postman + Newman)
+* Structured QA project organization
+
+---
+
+## 📊 Key Achievements
+
+* Built and tested full OpenCart local environment
+* Identified multiple real functional defects
+* Designed structured test suite for product module
+* Executed exploratory testing sessions
+* Created scalable QA project structure
+* Implemented API testing foundation
 
 ---
 
 ## 📌 Conclusion
 
-This project simulates a real-world QA workflow from requirements analysis to test execution and defect reporting. It demonstrates my ability to think like a QA engineer and structure testing activities professionally.
+This project demonstrates a complete Manual QA workflow from setup and test design to execution and defect reporting.
+
+It reflects real-world QA practices including structured testing, defect tracking, and exploratory analysis of an e-commerce system.
+
+The project will continue to evolve with planned API expansion, UI automation, and CI/CD integration.
