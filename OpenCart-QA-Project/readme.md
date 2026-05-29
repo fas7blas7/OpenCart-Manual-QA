@@ -41,6 +41,8 @@ The project covers both **backend (admin panel)** and **frontend (storefront)** 
 * Boundary Testing
 * Data Integrity Testing
 * Business Rule Validation
+* UI Automation Testing
+* End-to-End Testing
 
 ---
 
@@ -109,7 +111,11 @@ OpenCart-QA-Project/
 │       ├── collections/
 │       └── environments/
 │
-├── 09-automation-ui/   (Planned)
+├── 09-automation-ui/
+│   ├── playwright/
+│   ├── reports/
+│   ├── screenshots/
+│   └── README.md
 ├── 10-ci-cd/           (Planned)
 ├── docs/
 └── screenshots/
@@ -127,35 +133,9 @@ OpenCart-QA-Project/
 
 ---
 
-## 🚀 API Testing (OpenCart / Demo APIs)
+## API Testing (OpenCart / Demo APIs)
 
-API testing was implemented as a supporting QA layer.
-
-### Tools Used
-
-* Postman
-* Newman CLI
-
-### Scope
-
-* API request validation
-* Response status code verification
-* Negative test scenarios
-* Collection-based execution
-
-### Structure
-
-All Postman collections and environments are stored inside:
-
-```
-08-api-tests/postman/
-```
-
-### Execution Example
-
-```bash
-newman run postman/collections/opencart.collection.json -e postman/environments/local.environment.json
-```
+* For dedicated API automation testing, see my separate Dockerized-API-QA project.
 
 ---
 
@@ -165,12 +145,26 @@ This project is designed as a growing QA portfolio. The following improvements a
 
 ### 08 — API Testing Expansion
 
-* More comprehensive API coverage
-* Authentication flows
-* Data-driven API tests
-* Extended negative test scenarios
-* Improved reporting (HTML reports via Newman)
+Overview
 
+This folder is reserved for future API testing integration related to the OpenCart QA project.
+
+At the current stage, the primary focus of this repository is Manual QA, exploratory testing, functional validation, and defect reporting.
+
+Planned API Scope
+
+Future API testing may include:
+
+* Authentication API testing
+* Product endpoint validation
+* Cart and checkout API flows
+* Negative API scenarios
+* API response validation
+* Newman CLI execution
+* API automation integration
+* Current Status
+
+Planned / Structure only
 ---
 
 ### 09 — UI Automation Testing
@@ -195,6 +189,45 @@ This project is designed as a growing QA portfolio. The following improvements a
 
 ---
 
+## 📸 Screenshots
+
+This section provides visual evidence of the testing process, environment setup, and defects discovered during Manual QA testing of OpenCart.
+
+---
+
+### 🖥️ OpenCart Admin Dashboard
+
+Main admin interface used for product management, configuration, and testing.
+
+> Add image: `screenshots/admin-dashboard.png`
+
+---
+
+### 📦 Product Creation Page
+
+Used for functional and negative testing of product validation rules.
+
+> Add image: `screenshots/product-create.png`
+
+---
+
+### 🐞 Example Bug Evidence
+
+Shows a real defect found during testing (e.g. duplicate products, missing validation, or category issues).
+
+> Add image: `screenshots/bug-example.png`
+
+---
+
+### 🛒 Storefront View
+
+Displays how products appear to end users and highlights visibility or catalog issues.
+
+> Add image: `screenshots/storefront.png`
+
+---
+
+
 ## 🧠 Key Skills Demonstrated
 
 * Test case design from requirements
@@ -204,6 +237,10 @@ This project is designed as a growing QA portfolio. The following improvements a
 * Understanding business rules and validation logic
 * API testing basics (Postman + Newman)
 * Structured QA project organization
+* Playwright automation
+* UI automation testing
+* Automated assertions
+* Test execution/reporting
 
 ---
 
@@ -223,5 +260,8 @@ This project is designed as a growing QA portfolio. The following improvements a
 This project demonstrates a complete Manual QA workflow from setup and test design to execution and defect reporting.
 
 It reflects real-world QA practices including structured testing, defect tracking, and exploratory analysis of an e-commerce system.
+Transition into automation QA.
+Playwright implementation.
 
 The project will continue to evolve with planned API expansion, UI automation, and CI/CD integration.
+
