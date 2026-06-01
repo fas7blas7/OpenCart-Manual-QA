@@ -1,6 +1,6 @@
 async function adminLogin(page) {
 
-  await page.goto('http://localhost:8080/opencart/upload/adminqa');
+  await page.goto('http://localhost:80/opencart/upload/adminqa');
 
   await page.fill('#input-username', 'admin');
 

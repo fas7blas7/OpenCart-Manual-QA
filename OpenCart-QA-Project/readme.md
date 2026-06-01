@@ -133,50 +133,26 @@ OpenCart-QA-Project/
 
 ---
 
-## API Testing (OpenCart / Demo APIs)
+## 08 API Testing (OpenCart / Demo APIs)
 
 * For dedicated API automation testing, see my separate Dockerized-API-QA project.
 
 ---
 
-## 🚧 Planned Improvements (Future Work)
-
-This project is designed as a growing QA portfolio. The following improvements are planned:
-
-### 08 — API Testing Expansion
-
-Overview
-
-This folder is reserved for future API testing integration related to the OpenCart QA project.
-
-At the current stage, the primary focus of this repository is Manual QA, exploratory testing, functional validation, and defect reporting.
-
-Planned API Scope
-
-Future API testing may include:
-
-* Authentication API testing
-* Product endpoint validation
-* Cart and checkout API flows
-* Negative API scenarios
-* API response validation
-* Newman CLI execution
-* API automation integration
-* Current Status
-
-Planned / Structure only
----
-
 ### 09 — UI Automation Testing
 
-* Introduction of UI automation framework
-* Possible tools: Selenium / Cypress
-* Basic test automation for:
+UI automation is implemented using Playwright.
 
-  * Login
-  * Product creation
-  * Cart flow
-* Regression test automation suite
+Current scope:
+- Admin login automation
+- Product CRUD automation (Create / Edit / Delete)
+- Table validation and filtering
+- Browser dialog handling
+- End-to-end UI workflow testing
+
+📌 Implementation folder:
+
+09-automation-ui/playwright/
 
 ---
 
@@ -227,8 +203,16 @@ Displays how products appear to end users and highlights visibility or catalog i
 
 ---
 
+### 🛒 End to end tests for OpenCart
 
-## 🧠 Key Skills Demonstrated
+Displays how products appear to end users and highlights visibility or catalog issues.
+
+> Add image: `e2e-opencart`
+
+---
+
+
+## 🧠 Key Skills Demonstrated 
 
 * Test case design from requirements
 * Exploratory testing in real application

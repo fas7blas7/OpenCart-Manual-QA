@@ -2,123 +2,122 @@
 
 ## 📌 Overview
 
-This folder contains UI automation testing work for the OpenCart QA Portfolio Project using:
+This module contains UI automation tests for the OpenCart QA Portfolio Project using:
 
-* Playwright
-* JavaScript
-* Node.js
+- Playwright
+- JavaScript (Node.js)
 
-The goal of this module is to automate critical business flows and simulate real-world QA automation practices.
+The goal is to automate real-world QA workflows and demonstrate end-to-end testing skills including authentication, product management, and UI validation.
 
 ---
 
 ## 🎯 Current Automation Scope
 
-### ✅ Implemented
+### ✅ Implemented Features
 
-* Playwright project initialization
-* Browser automation setup
-* Automated admin login testing
-* Positive authentication validation
-* Negative authentication validation
-* Assertion handling
-* HTML report generation
+- Playwright project setup and configuration
+- Browser automation setup
+- Admin authentication (positive & negative scenarios)
+- Product CRUD automation (Create, Read/Search, Update, Delete)
+- Dynamic test data generation
+- UI assertions and validation
+- Table filtering and verification
+- Browser dialog handling (confirm popups)
+- HTML reporting
 
 ---
 
 ## 🧪 Automated Test Coverage
 
-### Authentication Tests
+### 🔐 Authentication Tests
 
-#### TC-AUTO-001 — Successful Admin Login
+- TC-AUTO-001 — Successful Admin Login
+- TC-AUTO-002 — Invalid Login Attempt
 
-Validates that an admin user can successfully authenticate and access the dashboard.
+### 📦 Product Management Tests
 
-#### TC-AUTO-002 — Invalid Login Attempt
-
-Validates that incorrect credentials trigger proper validation and error handling.
+- TC-AUTO-003 — Create Product
+- TC-AUTO-004 — Edit Product
+- TC-AUTO-005 — Delete Product
+- TC-AUTO-006 — Product Search / Filter Validation
 
 ---
 
 ## 🧰 Tools & Technologies
 
-* Playwright
-* JavaScript
-* Node.js
-* Chromium Browser
+- Playwright
+- JavaScript (Node.js)
+- Chromium browser automation
 
 ---
 
-## 📂 Current Structure
+## 📂 Project Structure
 
-```text
 09-automation-ui/
 │
 ├── playwright/
 │   ├── tests/
-│   │   └── login.spec.js
+│   │   ├── login.spec.js
+│   │   ├── products.spec.js
 │   │
-│   ├── node_modules/
+│   ├── playwright.config.js
 │   ├── package.json
 │   ├── package-lock.json
-│   ├── playwright.config.js
-│   └── .gitignore
+│   ├── .gitignore
 │
 └── README.md
-```
 
 ---
 
 ## ▶️ Running Tests
 
-Execute all tests:
-
-```bash
 npx playwright test
-```
 
-Run tests with visible browser:
-
-```bash
 npx playwright test --headed
-```
 
-Run tests in slow motion (debugging):
+npx playwright test tests/products.spec.js --headed
 
-```bash
-npx playwright test --headed --slow-mo=1000
-```
+npx playwright test --debug
 
 ---
 
 ## 📊 Reporting
 
-Playwright automatically generates execution reports after test execution.
+- Passed / failed tests
+- Execution time
+- Error logs
+- Trace viewer
 
-Reports include:
+Open report:
 
-* Passed tests
-* Failed tests
-* Execution duration
-* Error details
+npx playwright show-report
 
 ---
 
 ## 🚀 Planned Improvements
 
-Future automation coverage may include:
+- Page Object Model (POM)
+- Reusable authentication helper
+- Better selector strategy (data-testid)
+- Remove global state between tests
+- Screenshots on failure
+- CI/CD integration
+- Parallel execution optimization
 
-* Product creation automation
-* Product edit/delete flows
-* Cart & checkout validation
-* Negative product validation scenarios
-* Reusable login helpers
-* Page Object Model structure
-* CI/CD integration
-* Automated regression suites
+---
+
+## 🧠 QA Skills Demonstrated
+
+- End-to-end workflow testing
+- CRUD lifecycle validation
+- UI automation with dynamic data
+- DOM inspection and selector strategy
+- Browser dialog handling
+- Assertion design
+- Debugging and stabilization
 
 ---
 
 ## 📌 Notes
 
-This module complements the Manual QA section of the OpenCart project and demonstrates the transition from manual testing into UI automation engineering using Playwright.
+Transition from manual QA to UI automation engineering with real e-commerce workflows.
