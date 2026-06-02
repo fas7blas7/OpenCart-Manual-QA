@@ -1,191 +1,71 @@
 const { test, expect } = require('@playwright/test');
-
-//const { adminLogin } = require('../utils/login'); nested login for tests comfortability and avoiding repeating code
-const createdProducts = [];
+const { LoginPage } = require('../pages/loginPage.js');
+const { ProductPage } = require('../pages/productPage.js')
 
 test.describe('Product Management', () => {
 
-  
   test('Add product successfully', async ({ page }) => {
 
- // await adminLogin(page);
-    await page.goto('http://localhost:80/opencart/upload/adminqa');
-
-    await page.fill('#input-username', 'admin');
-
-    await page.fill('#input-password', 'admin');
-
-    await page.click('button[type="submit"]');
-
-    // 1. Click Catalog Collapse Menu
-    await page.click('[id="menu-catalog"]');
-
-    // 2. Click Products
-    await page.click('text=Products');
+    const loginPage = new LoginPage(page)
+    await loginPage.goto();
+    await loginPage.login();
     
-    // 3. Click Add New button
-    await page.click('[class="btn btn-primary"]');
+    const productPage = new ProductPage(page);
+    const productName = await productPage.createProduct()
+
+    // Assert creation 
+    const alertMsg = page.locator('.alert-success');   
+    await expect (alertMsg).toBeVisible();
+    await expect (alertMsg).toContainText("Success: You have modified products!")
+    console.log("✅ Correct Alert Appeared")
     
-    // 4. Enter product name
-    const random = Math.floor(Math.random() * 1000);
-    const productName = `TestProd${random}`;
-
-    createdProducts.push(productName);
-
-    console.log(createdProducts);
-
-    await page.click('[id="input-name-1"]');
-    await page.fill('[id="input-name-1"]', productName);
-    
-    // 5. Enter Meta tag Title 
-    await page.click('[id="input-meta-title-1"]');
-    await page.fill('[id="input-meta-title-1"]', 'newprdct');
-    
-    // 6. Click Data Tab
-    await page.click('[href="#tab-data"]');
-    
-    // 7. Enter model name
-    await page.click('[id="input-model"]');
-    await page.fill('[id="input-model"]', '101');
-    
-    // 8. Click SEO Tab
-    await page.click('[href="#tab-seo"]');    
-    // 9. Enter SEO Keyword
-    
-    const randomSEO = Math.floor(Math.random() * 10000);
-    const seoUrl = `seo-url-${randomSEO}`
-
-    await page.click('[name="product_seo_url[0][1]"]');
-    await page.fill('[name="product_seo_url[0][1]"]', seoUrl);
-
-    // 10. Click Save button
-    await page.click('button[type="submit"]');
-
-    // 11. Assert creation    
-    await expect(page.locator('.alert-success')).toBeVisible();
-
-    const alertMsg = page.locator('.alert-success');
-    if(await alertMsg.isVisible()) {
-      console.log("✅ Success Alert Appeared");
-    };
     
   });
 
   test('Edit product', async ({ page }) => {
+   
+    const loginPage = new LoginPage(page)
+    await loginPage.goto();
+    await loginPage.login();
 
- //   await adminLogin(page);    
-    await page.goto('http://localhost:80/opencart/upload/adminqa');
-
-    await page.fill('#input-username', 'admin');
-    await page.fill('#input-password', 'admin');
-    await page.click('button[type="submit"]');
-    // 1. Click Catalog Collapse Menu
-    await page.click('#menu-catalog');
-
-    // 2. Click Products
-    await page.click('text=Products');
-
-    // 3. Fill product name in filters
-    await page.fill('#input-name', createdProducts[0])
+    const productPage = new ProductPage(page);
+    const productName = await productPage.createProduct()     
+    console.log("✅ Correct Object found", productName);
     
-    // 4. Click Filter button
-    await page.click('#button-filter');
-
-    // 5. Assert product is visible in table
-    await expect(page.locator('table')).toContainText(createdProducts[0]);
-    console.log("✅ Correct Element found", createdProducts[0])
-
-    // 6. Mark and Edit the product
-    await page.click('.form-check-input');
-    await page.click('#form-product > div.table-responsive > table > tbody > tr > td:nth-child(7) > div > a');
-    const random = Math.floor(Math.random() * 10000);
-    const editedProduct = `EditedProduct-${random}`;
-    await page.fill('#input-name-1', editedProduct);
-    await page.click('#content > div.page-header > div > div > button');
-
-    // 11. Assert successful edit    
-    await expect(page.locator('.alert-success')).toBeVisible();
-
+    const editedProduct = await productPage.editProduct() 
     const alertMsg = page.locator('.alert-success');
-    if(await alertMsg.isVisible()) {
-      console.log("✅ Success Alert Appeared");
-    };
+    await expect(alertMsg).toBeVisible();
+    console.log(`✅ Success Alert Appeared for ${editedProduct}`);
+    
+    await productPage.openProductsPage()
+    //  Assert successful edit      
+    await expect(page.locator('#form-product tbody tr').filter({hasText: editedProduct})).toContainText(editedProduct);    
+        
   });
 
   test('Delete product', async ({ page }) => {
 
- // await adminLogin(page);  
+    const loginPage = new LoginPage(page)
+    await loginPage.goto();
+    await loginPage.login();
     
-    await page.goto('http://localhost:80/opencart/upload/adminqa');
-
-    await page.fill('#input-username', 'admin');
-    await page.fill('#input-password', 'admin');
-    await page.click('button[type="submit"]');
-
-    // 1. Click Catalog Collapse Menu
-    await page.click('[id="menu-catalog"]');
-
-    // 2. Click Products
-    await page.click('text=Products');
-    await page.pause();
-    // 3. Click Add New button
-    await page.click('[class="btn btn-primary"]');
-    
-    // 4. Enter product name
-    const random = Math.floor(Math.random() * 1000);
-    const productName = `TestProd${random}`;
-
-    createdProducts.push(productName);
-
-    console.log(createdProducts);
-
-    await page.click('[id="input-name-1"]');
-    await page.fill('[id="input-name-1"]', productName);
-    
-    // 5. Enter Meta tag Title 
-    await page.click('[id="input-meta-title-1"]');
-    await page.fill('[id="input-meta-title-1"]', 'newprdct');
-    
-    // 6. Click Data Tab
-    await page.click('[href="#tab-data"]');
-    
-    // 7. Enter model name
-    await page.click('[id="input-model"]');
-    await page.fill('[id="input-model"]', '101');
-    
-    // 8. Click SEO Tab
-    await page.click('[href="#tab-seo"]');    
-    // 9. Enter SEO Keyword
-    
-    const randomSEO = Math.floor(Math.random() * 10000);
-    const seoUrl = `seo-url-${randomSEO}`
-
-    await page.click('[name="product_seo_url[0][1]"]');
-    await page.fill('[name="product_seo_url[0][1]"]', seoUrl);
-
-    // 10. Click Save button
-    await page.click('button[type="submit"]');
-
-    // 11. Assert creation    
-    await expect(page.locator('.alert-success')).toBeVisible();    
-
-    // 12. Filter the product for deletion
-    await page.click('#collapse-1 > li.active > a');    
-    await page.fill('#input-name', createdProducts[0]);
-    await page.click('.form-check-input');
-
-    page.on('dialog', async dialog => {
-      console.log(dialog.message());
-      await dialog.accept();
-    });
-
-    await page.click('#content > div.page-header > div > div > button.btn.btn-danger');
-
+    const productPage = new ProductPage(page);
     const alertMsg = page.locator('.alert-success');
-      if(await alertMsg.isVisible()) {
-      console.log("✅ Success Alert Appeared");
-      };
+    const productName = await productPage.createProduct()
+
+    // Assert creation 
+    await expect (alertMsg).toBeVisible();    
+    console.log("✅ Correct Alert Appeared", productName);    
+    
+    await productPage.deleteProduct(productName);
+
+    await expect (alertMsg).toBeVisible();
+    await expect (alertMsg).toContainText("Success: You have modified products!");
+    
+    console.log("✅ Success Alert Appeared");  
 
   });
 
 });
+
+    

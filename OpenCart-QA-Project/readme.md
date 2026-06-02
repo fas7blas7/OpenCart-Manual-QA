@@ -2,9 +2,16 @@
 
 ## 📌 Overview
 
-This project demonstrates my Manual QA practice using the OpenCart e-commerce application. It simulates a real-world QA workflow including requirement analysis, test design, execution, exploratory testing, and defect reporting.
+This project demonstrates a complete QA engineering workflow using the OpenCart e-commerce application.
 
-The project covers both **backend (admin panel)** and **frontend (storefront)** testing, including real defect identification and structured QA documentation.
+It combines:
+- 🧪 Manual QA (requirements, test design, bug reporting)
+- ⚙️ API Testing (Postman + Newman)
+- 🤖 UI Automation (Playwright)
+- 🔄 End-to-End CRUD validation
+- 📊 CI/CD preparation and scalable QA structure
+
+The goal is to simulate a real-world QA environment and showcase both **manual and automation QA skills** in a structured, production-style project.
 
 ---
 
@@ -12,240 +19,243 @@ The project covers both **backend (admin panel)** and **frontend (storefront)** 
 
 ### ✔ In Scope
 
-* Admin Panel (Product Management)
-* Product creation, editing, deletion
-* Input validation (positive & negative testing)
-* Storefront behavior (product visibility, cart functionality)
-* Login validation scenarios (admin + storefront behavior)
-* Exploratory testing sessions
-* Bug reporting and defect tracking
+#### 🛠 Admin Panel Testing
+- Login authentication (valid/invalid scenarios)
+- Product management (CRUD: Create / Read / Update / Delete)
+- Input validation (positive & negative testing)
+- Table filtering & data verification
+
+#### 🛒 Storefront Testing
+- Product visibility validation
+- Cart behavior checks
+- UI consistency validation
+
+#### 🔌 API Testing (Planned/Partial)
+- Postman collections
+- Newman CLI execution
+- Dockerized API testing setup
+
+#### 🤖 UI Automation (Playwright)
+- Admin login automation
+- Product CRUD automation
+- Dynamic test data generation
+- Table validation & filtering
+- Dialog handling (alerts/confirm popups)
 
 ---
 
 ### ❌ Out of Scope
 
-* Real payment gateway processing
-* Production deployment testing
-* Performance / load testing
-* External third-party integrations (payment/shipping providers)
+- Payment gateway integration testing
+- Performance / load testing
+- Production deployment validation
+- Third-party service integrations
 
 ---
 
 ## 🧪 Testing Types Performed
 
-* Functional Testing
-* Negative Testing
-* Validation Testing
-* UI / UX Testing
-* Exploratory Testing
-* Boundary Testing
-* Data Integrity Testing
-* Business Rule Validation
-* UI Automation Testing
-* End-to-End Testing
+- Functional Testing
+- Negative Testing
+- UI/UX Testing
+- Exploratory Testing
+- Boundary Testing
+- Data Integrity Testing
+- Business Rule Validation
+- End-to-End Workflow Testing
+- UI Automation Testing (Playwright)
+
+---
+
+## 🤖 UI Automation (Playwright)
+
+UI automation is implemented using **Playwright (JavaScript)**.
+
+### 📌 Key Features Automated
+
+- Admin authentication flows
+- Product CRUD lifecycle:
+  - Create product
+  - Search/filter product
+  - Edit product
+  - Delete product
+- Dynamic data generation (unique product names)
+- Table row validation (strict locator handling)
+- Checkbox selection in dynamic tables
+- Browser dialog handling (confirm delete)
+- Assertion-based validation of UI states
+
+📁 Location:
+
+09-automation-ui/playwright/
+
+
+---
+
+## 🧪 Automated Test Coverage
+
+### 🔐 Authentication
+- Login with valid credentials
+- Login failure scenarios
+
+### 📦 Product Management (CRUD)
+- Create product (dynamic data)
+- Edit product (state update validation)
+- Delete product (full lifecycle validation)
+- Search & filter validation
 
 ---
 
 ## 🐞 Defect Management
 
-During testing, multiple functional and business-rule defects were identified and documented, including:
+Multiple functional and UI defects were identified and documented:
 
-* Product validation issues (empty / invalid fields)
-* Duplicate product handling inconsistencies
-* Category assignment and visibility issues
-* Stock and cart behavior issues
-* UX issues (missing warnings, navigation behavior)
+- Missing validation for product fields
+- Duplicate product handling inconsistencies
+- Cart and stock rule inconsistencies
+- UI/UX navigation issues
+- Data integrity issues in product management
 
-All defects are documented in the `/04-bug-reports` directory.
+All defects are stored in:
+
+/04-bug-reports
+
 
 ---
 
 ## 🐞 Bug Summary Overview
 
-| ID      | Title                                              | Severity | Priority | Status |
-| ------- | -------------------------------------------------- | -------- | -------- | ------ |
-| BUG-001 | Login form allows empty password submission        | Medium   | Medium   | Open   |
-| BUG-002 | Incorrect flat shipping rate applied               | Medium   | High     | Open   |
-| BUG-003 | Missing category images                            | Medium   | Medium   | Open   |
-| BUG-004 | Product allows zero price and quantity             | High     | High     | Open   |
-| BUG-005 | Product without category not visible in storefront | High     | Medium   | Open   |
-| BUG-006 | Duplicate product names allowed                    | Medium   | Medium   | Open   |
-| BUG-007 | Duplicate product model names allowed              | Medium   | Medium   | Open   |
-| BUG-008 | No unsaved changes warning in edit form            | Medium   | Medium   | Open   |
-| BUG-009 | Out-of-stock product can be added to cart          | Medium   | High     | Open   |
-| BUG-010 | Product created without category assignment        | Medium   | Medium   | Open   |
+| ID | Title | Severity | Priority | Status |
+|----|------|----------|----------|--------|
+| BUG-001 | Login allows empty password | Medium | Medium | Open |
+| BUG-002 | Incorrect shipping calculation | Medium | High | Open |
+| BUG-003 | Missing category images | Medium | Medium | Open |
+| BUG-004 | Product allows zero price/quantity | High | High | Open |
+| BUG-005 | Product not visible in storefront | High | Medium | Open |
+| BUG-006 | Duplicate product names allowed | Medium | Medium | Open |
+| BUG-007 | Duplicate model names allowed | Medium | Medium | Open |
+| BUG-008 | No unsaved changes warning | Medium | Medium | Open |
+| BUG-009 | Out-of-stock product added to cart | High | High | Open |
+| BUG-010 | Product created without category | Medium | Medium | Open |
 
 ---
 
 ## 🧩 Project Structure
 
-```
+
 OpenCart-QA-Project/
-│
-├── README.md
 │
 ├── 01-requirements/
 ├── 02-test-plan/
 ├── 03-test-cases/
 ├── 04-bug-reports/
-│   ├── BUG-001-login-form-allows-empty-password.md
-│   ├── BUG-002-incorrect-flat-shipping-rate.md
-│   ├──	BUG-003-missing-category-images.md
-│   ├──	BUG-004-product-add-allows-zero-price-and-quantity.md
-│   ├── BUG-005-inconsistent-product-models.md
-│   ├── BUG-006-duplicate-product-names-allowed.md
-│   ├── BUG-007-duplicate-product-model-names.md
-│   ├── BUG-008-no-unsaved-changes-warning.md
-│   ├── BUG-009-out-of-stock-add-to-cart.md
-│   ├── BUG-010-product-without-category.md
-│   ├── ft-execution-001.md
-│   ├── smoke-report-001.md
-│
 ├── 05-test-data/
 ├── 06-exploratory-testing/
 ├── 07-environment/
 │
-├── 08-api-testing/ (Planned)
-│   └── newman/
-│   └── postman/
-│       ├── collections/
-│       └── environments/
+├── 08-api-testing/ (planned)
 │
 ├── 09-automation-ui/
-│   ├── playwright/
-│   ├── reports/
-│   ├── screenshots/
-│   └── README.md
-├── 10-ci-cd/           (Planned)
-├── docs/
-└── screenshots/
-```
+│ ├── playwright/
+│ │ ├── e2e-ui-tests/
+│ │ ├── tests/
+│ │ ├── pages/
+│ │ ├── reports/
+│ │ ├── playwright.config.js
+│
+├── 10-ci-cd/ (planned)
+└── docs/
+
 
 ---
 
-## 🔧 Tools Used
+## 🔧 Tools & Technologies
 
-* OpenCart (local installation via XAMPP)
-* Postman (API testing)
-* Newman (CLI test execution)
-* XAMPP (local server environment)
-* Git & GitHub (version control)
-
----
-
-## 08 API Testing (OpenCart / Demo APIs)
-
-* For dedicated API automation testing, see my separate Dockerized-API-QA project.
+- 🧪 OpenCart (Local XAMPP environment)
+- ⚙️ Playwright (UI Automation)
+- 📬 Postman (API Testing)
+- 🚀 Newman (CLI execution)
+- 🐳 Docker (API test environment)
+- 🔄 Git & GitHub (Version control)
 
 ---
 
-### 09 — UI Automation Testing
+## 🚀 CI/CD (Planned)
 
-UI automation is implemented using Playwright.
-
-Current scope:
-- Admin login automation
-- Product CRUD automation (Create / Edit / Delete)
-- Table validation and filtering
-- Browser dialog handling
-- End-to-end UI workflow testing
-
-📌 Implementation folder:
-
-09-automation-ui/playwright/
-
----
-
-### 10 — CI/CD Integration
-
-* GitHub Actions pipeline setup
-* Automated test execution on push/PR
-* Newman CLI integration into CI
-* Future integration of UI automation into pipeline
+- GitHub Actions pipeline
+- Automated API test execution
+- Future integration of Playwright UI tests
+- HTML reporting in pipeline
 
 ---
 
 ## 📸 Screenshots
 
-This section provides visual evidence of the testing process, environment setup, and defects discovered during Manual QA testing of OpenCart.
+### 🖥️ Admin Dashboard
 
----
+screenshots/admin-dashboard.png
 
-### 🖥️ OpenCart Admin Dashboard
 
-Main admin interface used for product management, configuration, and testing.
+### 📦 Product Management
 
-> Add image: `screenshots/admin-dashboard.png`
+screenshots/product-create.png
 
----
 
-### 📦 Product Creation Page
+### 🐞 Bug Evidence
 
-Used for functional and negative testing of product validation rules.
+screenshots/bug-example.png
 
-> Add image: `screenshots/product-create.png`
-
----
-
-### 🐞 Example Bug Evidence
-
-Shows a real defect found during testing (e.g. duplicate products, missing validation, or category issues).
-
-> Add image: `screenshots/bug-example.png`
-
----
 
 ### 🛒 Storefront View
 
-Displays how products appear to end users and highlights visibility or catalog issues.
+screenshots/storefront.png
 
-> Add image: `screenshots/storefront.png`
 
+### 🤖 UI Automation Execution
+
+screenshots/e2e-opencart.png
+screenshots/productsPage.png
+screenshots/loginPage.png
+screenshots/terminal-pom.png
 ---
 
-### 🛒 End to end tests for OpenCart
+## 🧠 Key Skills Demonstrated
 
-Displays how products appear to end users and highlights visibility or catalog issues.
-
-> Add image: `e2e-opencart`
-
----
-
-
-## 🧠 Key Skills Demonstrated 
-
-* Test case design from requirements
-* Exploratory testing in real application
-* Functional and negative test execution
-* Defect identification and reporting
-* Understanding business rules and validation logic
-* API testing basics (Postman + Newman)
-* Structured QA project organization
-* Playwright automation
-* UI automation testing
-* Automated assertions
-* Test execution/reporting
+- Test design from requirements
+- Manual + exploratory testing execution
+- Defect reporting & analysis
+- API testing fundamentals
+- UI automation with Playwright
+- CRUD lifecycle validation
+- Locator strategy & debugging
+- Page Object Model design
+- End-to-end test workflow design
 
 ---
 
 ## 📊 Key Achievements
 
-* Built and tested full OpenCart local environment
-* Identified multiple real functional defects
-* Designed structured test suite for product module
-* Executed exploratory testing sessions
-* Created scalable QA project structure
-* Implemented API testing foundation
+- Built full QA workflow for OpenCart system
+- Designed structured manual test suite
+- Identified real functional and UI defects
+- Implemented Playwright automation framework
+- Created reusable CRUD automation logic
+- Built foundation for CI/CD integration
 
 ---
 
 ## 📌 Conclusion
 
-This project demonstrates a complete Manual QA workflow from setup and test design to execution and defect reporting.
+This project demonstrates a complete QA engineering workflow including manual testing, API testing, and UI automation.
 
-It reflects real-world QA practices including structured testing, defect tracking, and exploratory analysis of an e-commerce system.
-Transition into automation QA.
-Playwright implementation.
+It reflects real-world QA practices:
+- structured test design
+- defect tracking
+- automation framework development
+- end-to-end validation of e-commerce workflows
 
-The project will continue to evolve with planned API expansion, UI automation, and CI/CD integration.
-
+The project is actively evolving toward:
+- stronger Playwright framework architecture
+- API automation expansion
+- CI/CD integration
+- improved scalability and maintainability

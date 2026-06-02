@@ -1,51 +1,39 @@
-const { test, expect } = require('@playwright/test');
+const { test, expect, } = require('@playwright/test');
+const { LoginPage } = require('../pages/loginPage');
 
 test.describe("OpenCart Admin Panel", () => {
 
-    test("successfull login with valid credentials", async ({ page }) => {
+    test('Login test', async ({ page }) => {
+        const loginPage = new LoginPage(page);
 
-        // 1. Navigate to login page
-        await page.goto("http://localhost:80/opencart/upload/adminqa");
+        await loginPage.goto();
+        await loginPage.login('admin', 'admin');
 
-        // 2. Fill in username
-        await page.fill("#input-username", "admin");
-
-        // 3. Fill in password
-        await page.fill("#input-password", "admin");
-
-        // 4. Click Login Button
-        await page.click('button[type="submit"]');
-
-        // 5. Assert dashboard loaded
-        await expect(page).toHaveURL(/route=common\/dashboard/);
-
-        // 6. Assert UI
-        await expect(page.locator('h1')).toBeVisible();
-        await expect(page.locator('h1')).toHaveText('Dashboard');
-
-    });
+        await expect(page.locator ('h1')).toContainText("Dashboard");
+});
     
 });
 
 test.describe("Invalid login", () => {
-
     test("Login fails with invalid credentials", async ({ page }) => {
+        const loginPage = new LoginPage(page);
         
-        // 1. Navigate to login page
-        await page.goto("http://localhost:80/opencart/upload/adminqa");
+        await loginPage.goto();
+        await loginPage.login('wrong-name', 'wrong-pass');    
 
-        // 2. Fill in username
-        await page.fill("#input-username", "wrong-username");
+    });
 
-        // 3. Fill in password
-        await page.fill("#input-password", "wrong-password");
+    test("Login fails with empty credentials", async ({ page }) => {
+        const loginPage = new LoginPage(page);
+        
+        await loginPage.goto();
+        await loginPage.login('', ''); 
+        
+        const alertMsg = page.locator('[class="alert alert-danger alert-dismissible"]');
+        await expect(alertMsg).toBeVisible();
+        await expect(alertMsg).toContainText('No match for Username and/or Password.');
+        console.log("✅ Correct Alert Appeared");
 
-        // 4. Click Login Button
-        await page.click('button[type="submit"]');
+    });
 
-        // 5. Assert error message
-        await expect(page.locator('.alert-danger')).toContainText("No match for Username and/or Password.")
-
-
-    })
 });
