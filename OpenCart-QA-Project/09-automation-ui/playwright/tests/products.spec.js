@@ -51,13 +51,11 @@ test.describe('Product Management', () => {
     
     const productPage = new ProductPage(page);
     const alertMsg = page.locator('.alert-success');
-    const productName = await productPage.createProduct()
+    const productName = await productPage.deleteProduct()
 
     // Assert creation 
     await expect (alertMsg).toBeVisible();    
     console.log("✅ Correct Alert Appeared", productName);    
-    
-    await productPage.deleteProduct(productName);
 
     await expect (alertMsg).toBeVisible();
     await expect (alertMsg).toContainText("Success: You have modified products!");

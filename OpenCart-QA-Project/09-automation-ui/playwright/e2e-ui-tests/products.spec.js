@@ -8,7 +8,6 @@ test.describe('Product Management', () => {
   
   test('Add product successfully', async ({ page }) => {
 
- // await adminLogin(page);
     await page.goto('http://localhost:80/opencart/upload/adminqa');
 
     await page.fill('#input-username', 'admin');
@@ -73,7 +72,6 @@ test.describe('Product Management', () => {
 
   test('Edit product', async ({ page }) => {
 
- //   await adminLogin(page);    
     await page.goto('http://localhost:80/opencart/upload/adminqa');
 
     await page.fill('#input-username', 'admin');
@@ -110,12 +108,11 @@ test.describe('Product Management', () => {
     if(await alertMsg.isVisible()) {
       console.log("✅ Success Alert Appeared");
     };
+
   });
 
   test('Delete product', async ({ page }) => {
 
- // await adminLogin(page);  
-    
     await page.goto('http://localhost:80/opencart/upload/adminqa');
 
     await page.fill('#input-username', 'admin');
@@ -127,7 +124,7 @@ test.describe('Product Management', () => {
 
     // 2. Click Products
     await page.click('text=Products');
-    await page.pause();
+
     // 3. Click Add New button
     await page.click('[class="btn btn-primary"]');
     
@@ -155,8 +152,8 @@ test.describe('Product Management', () => {
     
     // 8. Click SEO Tab
     await page.click('[href="#tab-seo"]');    
-    // 9. Enter SEO Keyword
-    
+
+    // 9. Enter SEO Keyword    
     const randomSEO = Math.floor(Math.random() * 10000);
     const seoUrl = `seo-url-${randomSEO}`
 
@@ -167,7 +164,7 @@ test.describe('Product Management', () => {
     await page.click('button[type="submit"]');
 
     // 11. Assert creation    
-    await expect(page.locator('.alert-success')).toBeVisible();    
+    await expect(page.locator('.alert-success')).toBeVisible();  
 
     // 12. Filter the product for deletion
     await page.click('#collapse-1 > li.active > a');    
@@ -176,7 +173,9 @@ test.describe('Product Management', () => {
 
     page.on('dialog', async dialog => {
       console.log(dialog.message());
+      await page.waitForTimeout(2000);
       await dialog.accept();
+
     });
 
     await page.click('#content > div.page-header > div > div > button.btn.btn-danger');
@@ -185,6 +184,12 @@ test.describe('Product Management', () => {
       if(await alertMsg.isVisible()) {
       console.log("✅ Success Alert Appeared");
       };
+
+      await page.reload();
+
+      await page.locator('#input-name').fill(productName);
+      await page.locator('#button-filter').click();
+      await expect(page.locator('table')).not.toContainText(productName);   
 
   });
 

@@ -133,14 +133,12 @@ class ProductPage{
 
         await this.page.on('dialog', async dialog => {
             console.log(dialog.message());
+            await this.page.waitForTimeout(2000);
             await dialog.accept();
-        }); 
-        await this.page.click('.btn.btn-danger');
-        await this.page.on('dialog', async dialog => {
-            console.log(dialog.message());
-            await dialog.accept();
-        });     
+        });
 
+        await this.page.click('.btn.btn-danger');
+        
         return productName;
     }
 
